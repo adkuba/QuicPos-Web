@@ -1,9 +1,10 @@
 <template>
     <div>
+        <nuxt-link to="/" id="title">QuicPos</nuxt-link>
         <div v-if="post && !post.blocked">
             <Post :post="post"/>
         </div>
-        <div v-else>This post doesn't exists</div>
+        <div v-else class="error">This post doesn't exists</div>
     </div>
 </template>
 
@@ -22,14 +23,10 @@ export default Vue.extend({
                     text
                     userId
                     shares
-                    views {
-                        userId
-                        time
-                    }
+                    views
                     creationTime
                     initialReview
                     image
-                    reports
                 }
             }
         `
@@ -48,5 +45,21 @@ export default Vue.extend({
 
 
 <style scoped>
+
+.error{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25%;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#title{
+    font-size: 40px;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
+}
 
 </style>
