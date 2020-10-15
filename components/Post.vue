@@ -2,7 +2,8 @@
 	<div id="post">
 		<div v-if="!post.initialReview" class="verification">Post still unverified!</div>
 		<div class="text">{{ post.text }}</div>
-		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image">
+		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" v-if="post.image">
+		<br v-else>
 		<div class="date">
 			{{ post.creationTime.split(' ')[0] }} &bull; {{ post.creationTime.split(' ')[1].slice(0, -7) }}
 		</div>
@@ -74,6 +75,7 @@ export default Vue.extend({
 	background: rgb(28, 29, 30);
 	border-radius: 20px;
 	padding: 30px 40px;
+	min-width: 250px;
 }
 
 </style>

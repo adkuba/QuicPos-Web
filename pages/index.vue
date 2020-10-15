@@ -19,7 +19,7 @@ export default Vue.extend({})
 <style>
 .container {
 	margin: 0 auto;
-	min-height: 100vh;
+	min-height: 90vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

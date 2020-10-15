@@ -44,13 +44,6 @@ export default {
           lg: Infinity
         }
       }
-    ]
+    ],
   ],
-
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {
-  }
 }
