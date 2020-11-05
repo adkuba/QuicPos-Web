@@ -1,8 +1,8 @@
 <template>
-	<div id="post">
+	<div id="post" :class="$mq">
 		<div v-if="!post.initialReview" class="verification">Post still unverified!</div>
 		<div class="text">{{ post.text }}</div>
-		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" v-if="post.image">
+		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" :class="$mq" v-if="post.image">
 		<br v-else>
 		<div class="date">
 			{{ post.creationTime.split(' ')[0] }} &bull; {{ post.creationTime.split(' ')[1].slice(0, -7) }}
@@ -63,8 +63,13 @@ export default Vue.extend({
 .image{
 	height: 200px;
 	max-height: 80vh;
-	object-fit: contain;
+	object-fit: cover;
 	border-radius: 5px;
+	width: 100%;
+}
+
+.image.lg{
+	height: 270px;
 }
 
 #post{
@@ -72,10 +77,21 @@ export default Vue.extend({
 	top: 25%;
 	left: 50%;
 	transform: translateX(-50%) ;
-	background: rgb(28, 29, 30);
+	background: rgb(22, 23, 24);
 	border-radius: 20px;
 	padding: 30px 40px;
-	min-width: 250px;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+#post.md{
+	width: 55%;
+	max-width: 410px;
+}
+
+#post.sm{
+	min-width: 0;
+	width: 90%;
 }
 
 </style>

@@ -1,11 +1,8 @@
 <template>
   <div class="container">
-	<div>
-	  <h1 class="title">QuicPos</h1>
-	  <div class="subtitle">My application</div>
-	  <div class="links">
-		<a href="https://github.com/adkuba/QuicPos-Server" target="_blank" rel="noopener noreferrer" class="button--grey">GitHub</a>
-	  </div>
+	<div class="sub-container" :class="$mq">
+	  	<h1 class="title">QuicPos</h1>
+		<div class="subtitle">Create posts with maximum privacy</div>
 	</div>
   </div>
 </template>
@@ -26,22 +23,32 @@ export default Vue.extend({})
 	text-align: center;
 }
 
+.sub-container {
+	width: 40%;
+}
+
+.sub-container.md{
+	width: 60%;
+}
+
+.sub-container.sm{
+	width: 95%;
+}
+
 .title {
   	display: block;
-  	font-weight: 300;
-  	font-size: 100px;
+  	font-weight: bold;
+  	font-size: 70px;
   	letter-spacing: 1px;
-	margin-bottom: 20px;
+	margin-bottom: 55px;
 }
 
 .subtitle {
-	font-weight: 300;
-	font-size: 42px;
+	font-weight: bold;
+	font-size: 25px;
 	word-spacing: 5px;
+	letter-spacing: 1px;
 	padding-bottom: 15px;
 }
 
-.links {
-	padding-top: 15px;
-}
 </style>

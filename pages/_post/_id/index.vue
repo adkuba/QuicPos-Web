@@ -1,7 +1,7 @@
 <template>
     <div>
         <nuxt-link to="/" id="title">QuicPos</nuxt-link>
-        <div v-if="post && !post.blocked">
+        <div v-if="post.ID.slice(10, -2) != '000000000000000000000000' && !post.blocked">
             <Post :post="post"/>
         </div>
         <div v-else class="error">This post doesn't exists</div>
@@ -30,7 +30,7 @@ export default Vue.extend({
                 }
             }
         `
-        const client = new GraphQLClient("http://localhost:8080/query")
+        const client = new GraphQLClient("http://api.quicpos.com/query")
 
         const variables = { id: params.id }
         const post = await client.request(query, variables).catch(error => {})
@@ -50,16 +50,18 @@ export default Vue.extend({
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 25%;
+    top: 30%;
     font-size: 25px;
     font-weight: bold;
 }
 
 #title{
-    font-size: 40px;
-    margin: 10px;
+    position: absolute;
+    font-size: 35px;
+    margin: 10px 20px;
     color: white;
     text-decoration: none;
+    font-weight: bold;
 }
 
 </style>

@@ -19,18 +19,8 @@ html {
   color: white;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid white;
-  color: white;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+body {
+  width: 100%;
+  margin: 0;
 }
 </style>

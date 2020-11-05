@@ -7,7 +7,10 @@
             <option>New posts</option>
             <option>Reported</option>
         </select>
+        <div class="sep"></div>
         <div>Posts to be reviewed in selected mode: {{ left }}</div>
+        <div>Spam probability {{ spam*100 }}%</div>
+        <div class="sep"></div>
         <div class="action" v-on:click="review(false)">Mark as good</div>
         <div class="action" v-on:click="review(true)">Block post</div>
         <Post :post="post" v-if="post && left!=0"/>
@@ -22,10 +25,13 @@ export default Vue.extend({
     data(){
         return {
             password: "",
-            post: null,
+            post: {
+                ID: ""
+            },
             mode: '',
             left: 0,
-            client: new GraphQLClient("http://localhost:8080/query")
+            spam: 0,
+            client: new GraphQLClient("http://api.quicpos.com/query")
         }
     },
     methods: {
@@ -79,6 +85,7 @@ export default Vue.extend({
                             image
                         }
                         left
+                        spam
                     }
                 }
             `
@@ -91,6 +98,7 @@ export default Vue.extend({
                 .then(response => {
                     this.post = response.unReviewed.post
                     this.left = response.unReviewed.left
+                    this.spam = response.unReviewed.spam
                 })
                 .catch(error => {})
         }
@@ -100,6 +108,10 @@ export default Vue.extend({
 
 <style scoped>
 
+.sep{
+    margin-top: 50px;
+}
+
 .action{
     cursor: pointer;
 }
@@ -108,6 +120,7 @@ export default Vue.extend({
     display: inline;
     cursor: pointer;
     border: 1px solid white;
+    padding: 5px 10px;
 }
 
 #password{
