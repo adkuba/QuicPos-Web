@@ -12,8 +12,8 @@ handlers:
 
     # catch all handler to index.html
   - url: /.*
-    static_files: dist/index.html
-    upload: dist/index.html
+    static_files: dist/200.html
+    upload: dist/200.html
     #secure: always
 
 

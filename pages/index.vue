@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="$mq">
 	<div class="sub-container" :class="$mq">
 	  	<h1 class="title">QuicPos</h1>
 		<div class="subtitle">Create posts with maximum privacy</div>
@@ -21,6 +21,10 @@ export default Vue.extend({})
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+}
+
+.container.sm{
+	min-height: 80vh;
 }
 
 .sub-container {

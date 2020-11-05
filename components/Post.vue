@@ -77,7 +77,7 @@ export default Vue.extend({
 	top: 25%;
 	left: 50%;
 	transform: translateX(-50%) ;
-	background: rgb(22, 23, 24);
+	background: rgb(28, 29, 30);
 	border-radius: 20px;
 	padding: 30px 40px;
 	width: 30%;
@@ -90,6 +90,7 @@ export default Vue.extend({
 }
 
 #post.sm{
+	top: 20%;
 	min-width: 0;
 	width: 90%;
 }
