@@ -1,4 +1,5 @@
 # QuicPos-Web
+QuicPos webpage in Nuxt.
 
 ## Build Setup
 
