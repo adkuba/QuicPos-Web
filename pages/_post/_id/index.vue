@@ -1,7 +1,7 @@
 <template>
     <div>
         <nuxt-link to="/" id="title">QuicPos</nuxt-link>
-        <div v-if="post.ID.slice(10, -2) != '000000000000000000000000' && !post.blocked">
+        <div v-if="post && post.ID && post.ID.slice(10, -2) != '000000000000000000000000' && !post.blocked">
             <Post :post="post"/>
         </div>
         <div v-else class="error">This post doesn't exists</div>
@@ -14,6 +14,12 @@ import Vue from 'vue'
 import { GraphQLClient, gql } from 'graphql-request'
 
 export default Vue.extend({
+
+    data() {
+        return {
+            post: null
+        }
+    },
     
     async asyncData({ params }){
         const query = gql`
@@ -30,7 +36,7 @@ export default Vue.extend({
                 }
             }
         `
-        const client = new GraphQLClient("http://api.quicpos.com/query")
+        const client = new GraphQLClient("https://api.quicpos.com/query")
 
         const variables = { id: params.id }
         const post = await client.request(query, variables).catch(error => {})
@@ -38,6 +44,30 @@ export default Vue.extend({
             return {post: post.viewerPost}
         }
         return { post: null }
+    },
+
+    async created(){
+        if (this.post == null){
+            const query = gql`
+                query getPostByID($id: String!) {
+                    viewerPost(id: $id) {
+                        ID
+                        text
+                        userId
+                        shares
+                        views
+                        creationTime
+                        initialReview
+                        image
+                    }
+                }
+            `
+            const client = new GraphQLClient("https://api.quicpos.com/query")
+
+            const variables = { id: this.$route.params.id }
+            const resp = await client.request(query, variables).catch(error => {})
+            this.post = resp.viewerPost
+        }
     }
     
 })

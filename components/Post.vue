@@ -13,23 +13,60 @@
 			<div class="stat-item">{{ post.shares }}</div>
 			shares
 		</div>
+		<div class="action" v-on:click="reportPost()">Report</div>
 	</div>
 </template>
 
 
 <script lang="ts">
 import Vue from 'vue'
+import { GraphQLClient, gql } from 'graphql-request'
+
 export default Vue.extend({
-	//example post/5f79cc689ec125d75f2e36e5
 
 	props: {
 		post: Object
+	},
+
+	methods: {
+		async reportPost(){
+			if (confirm("Do you really want to report this post?")){
+				const query = gql`
+					mutation review($userID: Int!, $postID: String!) {
+						report(
+							input: { 
+								userID: $userID, 
+								postID: $postID 
+							})
+					}
+				`
+				const client = new GraphQLClient("https://api.quicpos.com/query")
+
+				const variables = { userID: -3, postID: this.post.ID.slice(10, -2) }
+				const resp = await client.request(query, variables).catch(error => {})
+				if (!resp){
+					alert("Can't report post, contact with us.")
+				}
+				else if (resp.report) {
+					alert("Thank you, out team will review it.")
+				} else {
+					alert("Can't report post, contact with us.")
+				}
+			}
+		}
 	}
+
 })
 </script>
 
 
 <style scoped>
+
+.action{
+	margin-top: 20px;
+	cursor: pointer;
+	display: inline-block;
+}
 
 .stat{
 	font-size: 14px;
@@ -58,6 +95,7 @@ export default Vue.extend({
 
 .text{
 	margin-bottom: 20px;
+	white-space: pre-wrap;
 }
 
 .image{
