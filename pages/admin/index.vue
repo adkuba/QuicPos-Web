@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>Admin page</div>
-        <input id="password" placeholder="Enter password" v-model="password">
+        <input id="password" placeholder="Enter password" type="password" v-model="password">
         <div class="get-button" v-on:click="getPost()">Get post</div>
         <select id="mode" v-model="mode">
             <option>New posts</option>
@@ -106,30 +106,29 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
 
-.sep{
-    margin-top: 50px;
-}
+.sep
+    margin-top: 50px
 
-.action{
-    cursor: pointer;
-}
 
-.get-button{
-    display: inline;
-    cursor: pointer;
-    border: 1px solid white;
-    padding: 5px 10px;
-}
+.action
+    cursor: pointer
 
-#password{
-    background: rgb(28, 29, 30);
-    outline: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 5px 10px;
-}
+
+.get-button
+    display: inline
+    cursor: pointer
+    border: 1px solid white
+    padding: 5px 10px
+
+
+#password
+    background: rgb(28, 29, 30)
+    outline: none
+    border: none
+    color: white
+    font-size: 16px
+    padding: 5px 10px
 
 </style>

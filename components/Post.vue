@@ -60,77 +60,72 @@ export default Vue.extend({
 </script>
 
 
-<style scoped>
+<style lang="sass" scoped>
 
-.action{
-	margin-top: 20px;
-	cursor: pointer;
-	display: inline-block;
-}
+.action
+	margin-top: 20px
+	cursor: pointer
+	display: inline-block
+	font-weight: bold
+	letter-spacing: 1px
 
-.stat{
-	font-size: 14px;
-	color:#b2b2b2;
-	margin-top: 3px;
-}
 
-.stat-item{
-	display: inline;
-	font-weight: bold;
-	color: white;
-}
+.stat
+	font-size: 14px
+	color:#b2b2b2
+	margin-top: 3px
 
-.date{
-	font-size: 14px;
-	color: #b2b2b2;
-	margin-top: 15px;
-}
 
-.verification{
-	font-size: 13px;
-	text-align: center;
-	transform: translateY(-20px);
-	color: #999999;
-}
+.stat-item
+	display: inline
+	font-weight: bold
+	color: white
 
-.text{
-	margin-bottom: 20px;
-	white-space: pre-wrap;
-}
 
-.image{
-	height: 200px;
-	max-height: 80vh;
-	object-fit: cover;
-	border-radius: 5px;
-	width: 100%;
-}
+.date
+	font-size: 14px
+	color: #b2b2b2
+	margin-top: 15px
 
-.image.lg{
-	height: 270px;
-}
 
-#post{
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	transform: translateX(-50%) ;
-	background: rgb(28, 29, 30);
-	border-radius: 20px;
-	padding: 30px 40px;
-	width: 30%;
-	box-sizing: border-box;
-}
+.verification
+	font-size: 13px
+	text-align: center
+	transform: translateY(-20px)
+	color: #999999
 
-#post.md{
-	width: 55%;
-	max-width: 410px;
-}
 
-#post.sm{
-	top: 20%;
-	min-width: 0;
-	width: 90%;
-}
+.text
+	margin-bottom: 20px
+	white-space: pre-wrap
+
+
+.image
+	height: 200px
+	max-height: 80vh
+	object-fit: cover
+	border-radius: 5px
+	width: 100%
+	.lg
+		height: 270px
+
+
+#post
+	position: absolute
+	top: 220px
+	left: 50%
+	transform: translateX(-50%)
+	border-radius: 20px
+	padding: 0px 25px
+	width: 30%
+	box-sizing: border-box
+	.md
+		width: 80%
+		max-width: 500px
+	.sm
+		top: 20%
+		min-width: 0
+		width: 100%
+		top: 110px
 
 </style>

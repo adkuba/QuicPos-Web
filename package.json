@@ -27,6 +27,11 @@
     "@nuxtjs/eslint-module": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.13.0",
-    "eslint-plugin-nuxt": "^1.0.0"
+    "eslint-plugin-nuxt": "^1.0.0",
+    "fibers": "^5.0.0",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.0.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0"
   }
 }

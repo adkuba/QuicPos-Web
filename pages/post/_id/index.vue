@@ -66,7 +66,9 @@ export default Vue.extend({
 
             const variables = { id: this.$route.params.id }
             const resp = await client.request(query, variables).catch(error => {})
-            this.post = resp.viewerPost
+            if (resp){
+                this.post = resp.viewerPost
+            }
         }
     }
     
@@ -74,24 +76,25 @@ export default Vue.extend({
 </script>
 
 
-<style scoped>
+<style lang="sass" scoped>
 
-.error{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 30%;
-    font-size: 25px;
-    font-weight: bold;
-}
+.error
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    top: 30%
+    font-size: 25px
+    font-weight: bold
 
-#title{
-    position: absolute;
-    font-size: 35px;
-    margin: 10px 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
+
+#title
+    position: absolute
+    font-size: 35px
+    margin: 10px 20px
+    color: white
+    text-decoration: none
+    font-weight: bold
+    letter-spacing: 1px
+
 
 </style>
