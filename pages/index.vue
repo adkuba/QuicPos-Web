@@ -21,15 +21,15 @@ export default Vue.extend({})
     justify-content: center
     align-items: center
     text-align: center
-    .sm
+    &.sm
         min-height: 80vh
 
 
 .sub-container 
     width: 40%
-    .md
+    &.md
         width: 60%
-    .sm
+    &.sm
         width: 95%
 
 

@@ -106,7 +106,7 @@ export default Vue.extend({
 	object-fit: cover
 	border-radius: 5px
 	width: 100%
-	.lg
+	&.lg
 		height: 270px
 
 
@@ -119,10 +119,10 @@ export default Vue.extend({
 	padding: 0px 25px
 	width: 30%
 	box-sizing: border-box
-	.md
+	&.md
 		width: 80%
 		max-width: 500px
-	.sm
+	&.sm
 		top: 20%
 		min-width: 0
 		width: 100%
