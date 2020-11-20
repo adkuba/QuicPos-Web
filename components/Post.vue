@@ -14,6 +14,7 @@
 			shares
 		</div>
 		<div class="action" v-on:click="reportPost()">Report</div>
+		<nuxt-link :to="'/stats/' + post.ID.slice(10, -2)" class="stats-link">Stats</nuxt-link>
 	</div>
 </template>
 
@@ -61,6 +62,15 @@ export default Vue.extend({
 
 
 <style lang="sass" scoped>
+
+.stats-link
+	display: inline-block
+	text-decoration: none
+	letter-spacing: 1px
+	color: white
+	font-weight: bold
+	margin-left: 25px
+
 
 .action
 	margin-top: 20px
