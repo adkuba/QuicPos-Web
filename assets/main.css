@@ -1,0 +1,9 @@
+:root {
+    --color: #000000;
+    --bg: #ffffff;
+  }
+  
+.dark-mode {
+--color: #ffffff;
+--bg: #000000;
+}

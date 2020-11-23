@@ -1,11 +1,11 @@
 <template>
 	<div id="post" :class="$mq">
 		<div v-if="!post.initialReview" class="verification">Post still unverified!</div>
+		<div class="userid">User @{{ post.userId }}</div>
 		<div class="text">{{ post.text }}</div>
 		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" :class="$mq" v-if="post.image">
-		<br v-else>
 		<div class="date">
-			{{ post.creationTime.split(' ')[0] }} &bull; {{ post.creationTime.split(' ')[1].slice(0, -7) }}
+			{{ post.creationTime.split(' ')[0] }} &bull; {{ post.creationTime.split(' ')[1].slice(0, -6) }}
 		</div>
 		<div class="stat">
 			<div class="stat-item">{{ post.views }}</div>
@@ -67,7 +67,7 @@ export default Vue.extend({
 	display: inline-block
 	text-decoration: none
 	letter-spacing: 1px
-	color: white
+	color: var(--color)
 	font-weight: bold
 	margin-left: 25px
 
@@ -80,6 +80,12 @@ export default Vue.extend({
 	letter-spacing: 1px
 
 
+.userid
+	font-size: 14px
+	color:#b2b2b2
+	margin-bottom: 20px
+
+
 .stat
 	font-size: 14px
 	color:#b2b2b2
@@ -89,13 +95,13 @@ export default Vue.extend({
 .stat-item
 	display: inline
 	font-weight: bold
-	color: white
+	color: var(--color)
 
 
 .date
 	font-size: 14px
 	color: #b2b2b2
-	margin-top: 15px
+	margin-top: 40px
 
 
 .verification
@@ -122,7 +128,7 @@ export default Vue.extend({
 
 #post
 	position: absolute
-	top: 220px
+	top: 210px
 	left: 50%
 	transform: translateX(-50%)
 	border-radius: 20px

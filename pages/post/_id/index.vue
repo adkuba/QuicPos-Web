@@ -1,7 +1,7 @@
 <template>
     <div>
         <nuxt-link to="/" id="title">QuicPos</nuxt-link>
-        <div v-if="post && post.ID && post.ID.slice(10, -2) != '000000000000000000000000' && !post.blocked">
+        <div v-if="post.ID.slice(10, -2) != '000000000000000000000000' && !post.blocked">
             <Post :post="post"/>
         </div>
         <div v-else class="error">This post doesn't exists</div>
@@ -15,39 +15,40 @@ import { GraphQLClient, gql } from 'graphql-request'
 
 export default Vue.extend({
 
-    data() {
-        return {
-            post: null
+    computed: {
+        post(){
+            return this.$store.state.post
         }
     },
     
-    async asyncData({ params }){
-        const query = gql`
-            query getPostByID($id: String!) {
-                viewerPost(id: $id) {
-                    ID
-                    text
-                    userId
-                    shares
-                    views
-                    creationTime
-                    initialReview
-                    image
+    async asyncData({ params, store }){
+        if (store.state.post.ID.slice(10, -2) != params.id){
+            const query = gql`
+                query getPostByID($id: String!) {
+                    viewerPost(id: $id) {
+                        ID
+                        text
+                        userId
+                        shares
+                        views
+                        creationTime
+                        initialReview
+                        image
+                    }
                 }
-            }
-        `
-        const client = new GraphQLClient("https://api.quicpos.com/query")
+            `
+            const client = new GraphQLClient("https://api.quicpos.com/query")
 
-        const variables = { id: params.id }
-        const post = await client.request(query, variables).catch(error => {})
-        if (post) {
-            return {post: post.viewerPost}
+            const variables = { id: params.id }
+            const post = await client.request(query, variables).catch(error => {})
+            if (post) {
+                store.commit('changePost', post.viewerPost)
+            }
         }
-        return { post: null }
     },
 
     async created(){
-        if (this.post == null){
+        if (this.post.ID.slice(10, -2) != this.$route.params.id){
             const query = gql`
                 query getPostByID($id: String!) {
                     viewerPost(id: $id) {
@@ -67,7 +68,7 @@ export default Vue.extend({
             const variables = { id: this.$route.params.id }
             const resp = await client.request(query, variables).catch(error => {})
             if (resp){
-                this.post = resp.viewerPost
+                this.$store.commit('changePost', resp.viewerPost)
             }
         }
     }
@@ -91,7 +92,7 @@ export default Vue.extend({
     position: absolute
     font-size: 35px
     margin: 10px 20px
-    color: white
+    color: var(--color)
     text-decoration: none
     font-weight: bold
     letter-spacing: 1px

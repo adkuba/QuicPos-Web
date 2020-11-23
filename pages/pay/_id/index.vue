@@ -73,7 +73,7 @@ export default Vue.extend({
     position: absolute
     font-size: 35px
     margin: 10px 20px
-    color: white
+    color: var(--color)
     text-decoration: none
     font-weight: bold
     letter-spacing: 1px

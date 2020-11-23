@@ -10,7 +10,7 @@
             </div>
             <div class="info">
                 Budget:
-                <div style="display: inline; color: white">0$</div>
+                <div style="display: inline; color: var(--color)">0$</div>
             </div>
             <nuxt-link :to="'/pay/' + $route.params.id" class="promote-link">Promote</nuxt-link>
         </div>
@@ -104,7 +104,7 @@ export default Vue.extend({
 
 .promote-link
     text-decoration: none
-    color: white
+    color: var(--color)
     font-weight: bold
     font-size: 20px
 
@@ -115,7 +115,7 @@ export default Vue.extend({
 
 .subtitle
     font-size: 20px
-    color: white
+    color: var(--color)
     letter-spacing: 2px
 
 .error
@@ -131,7 +131,7 @@ export default Vue.extend({
     position: absolute
     font-size: 35px
     margin: 10px 20px
-    color: white
+    color: var(--color)
     text-decoration: none
     font-weight: bold
     letter-spacing: 1px
