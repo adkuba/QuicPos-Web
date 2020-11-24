@@ -1,6 +1,7 @@
 <template>
   <div>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <Nuxt />
   </div>
 </template>

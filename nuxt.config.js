@@ -1,7 +1,7 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'QuicPos-Web',
+    title: 'QuicPos',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -41,7 +41,7 @@ export default {
         // Default breakpoint for SSR
         defaultBreakpoint: 'default',
         breakpoints: {
-          sm: 450,
+          sm: 500,
           md: 1250,
           lg: Infinity
         }

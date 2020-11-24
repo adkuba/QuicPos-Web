@@ -141,7 +141,7 @@ export default Vue.extend({
     position: absolute
     top: 190px
     left: 50%
-    width: 50%
+    width: 40%
     transform: translateX(-50%)
     box-sizing: border-box
     &.md
