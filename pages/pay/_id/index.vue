@@ -6,21 +6,24 @@
             <div>User @{{stats.userid}}</div>
             <div>{{stats.text.substring(0, 100)}}...</div>
             <!-- Display a payment form -->
-            <form id="payment-form" :class="$mq" @submit="payWithCard()">
+            <form id="payment-form" :class="$mq" action="javascript:void(0);">
                 <div class="dolar">$</div>
-                <input type="number" placeholder="0" class="amount">
+                <input id="amount-number" required type="number" placeholder="0" class="amount" step="0.01">
                 <div id="card-element"></div>
-                <button id="submit">
+                <button id="submit" v-on:click="getPaymentIntent()">
                     <div class="spinner hidden" id="spinner"></div>
                     <span id="button-text">Pay</span>
                 </button>
                 <p id="card-error" role="alert"></p>
                 <p class="result-message hidden">
-                    Payment succeeded, see the result in your
-                    <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                    Payment succeeded Refresh the page to pay again.
                 </p>
             </form>
             <nuxt-link :to="'/stats/' + $route.params.id" class="promote-link">Stats</nuxt-link>
+            <div class="info">
+                Budget:
+                <div style="display: inline; color: var(--color)">${{ stats.money }}</div>
+            </div>
         </div>
         <div v-else class="error">This post doesn't exists</div>
     </div>
@@ -35,9 +38,10 @@ export default Vue.extend({
 
     data() {
         return {
-            stats: null,
+            stats: null as any,
             stripe: null as any,
-            card: null as any
+            card: null as any,
+            client: new GraphQLClient("https://api.quicpos.com/query")
         }
     },
 
@@ -90,6 +94,7 @@ export default Vue.extend({
                             localization
                             date
                         }
+                        money
                     }
                 }
             `
@@ -104,8 +109,28 @@ export default Vue.extend({
     },
 
     methods: {
+        async getPaymentIntent(){
+            const query = gql`
+                query getStripeClient($amount: Float!) {
+                    getStripeClient(amount: $amount)
+                }
+            `
+            const client = new GraphQLClient("https://api.quicpos.com/query")
+
+            var amountField = document.getElementById("amount-number") as HTMLInputElement
+            if (amountField){
+                var amount = parseFloat(amountField.value)
+                if (amount > 0){
+                    const variables = { amount: amount }
+                    const resp = await client.request(query, variables).catch(error => {})
+                    if (resp){
+                        this.payWithCard(resp.getStripeClient, amount)
+                    }
+                }
+            }
+        },
         //client secret generated from server
-        payWithCard(clientSecret: string){
+        payWithCard(clientSecret: string, amount: number){
             this.loading(true)
             var self = this
             this.stripe
@@ -118,24 +143,47 @@ export default Vue.extend({
                     if (result.error){
                         self.showError(result.error.message)
                     } else {
-                        self.paymentComplete(result.paymentIntent.id)
+                        self.paymentComplete(result.paymentIntent.id, amount)
                     }
                 })
         },
-        paymentComplete(paymentIntentId: string) {
+        paymentComplete(paymentIntentId: string, amount: number) {
             this.loading(false)
-            var result = document.querySelector(".result-message a")
-            if (result){
-                result.setAttribute(
-                    "href",
-                    "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-                )
+            var result = document.querySelector(".result-message")
+            if (result) {
                 result.classList.remove("hidden")
             }
             var button = document.querySelector("button")
             if (button){
                 button.disabled = true
             }
+            
+            
+            const query = gql`
+            mutation payment($amount: Float!, $postid: String!) {
+                    payment(
+                        input: {
+                            amount: $amount
+                            postid: $postid
+                        }
+                    )
+                }
+            `
+
+            const variables = {
+                amount: amount,
+                postid: this.$route.params.id
+            }
+            this.client.request(query, variables)
+                .then(response => {
+                    if (!response.payment){
+                        alert("Can't pay")
+                    } else {
+                        this.stats.money += amount
+                        alert("Success, thank you!")
+                    }
+                })
+                .catch(error => {alert(error)})
         },
         showError(errorMessageText: string){
             this.loading(false)
@@ -146,7 +194,7 @@ export default Vue.extend({
                     if (errorMessage){
                         errorMessage.textContent = ""
                     }
-                }, 4000)
+                }, 10000)
             }
         },
         loading(isLoading: boolean){
@@ -185,6 +233,13 @@ export default Vue.extend({
 
 <style lang="sass" scoped>
 
+.info
+    color: gray
+    font-size: 15px
+    margin-bottom: 5px
+    display: inline-block
+    margin-left: 20px
+
 .dolar
     font-size: 19px
     color: #B8B8B8
@@ -192,6 +247,7 @@ export default Vue.extend({
     position: absolute
 
 .promote-link
+    display: inline-block
     text-decoration: none
     color: var(--color)
     font-weight: bold
@@ -238,11 +294,12 @@ input
   display: none
 
 #card-error 
-  color: rgb(105, 115, 134)
+  color: var(--color)
   text-align: left
   font-size: 13px
   line-height: 17px
   margin-top: 12px
+  padding-left: 2px
 
 #card-element 
   padding: 12px

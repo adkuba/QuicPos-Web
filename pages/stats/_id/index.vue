@@ -10,7 +10,7 @@
             </div>
             <div class="info">
                 Budget:
-                <div style="display: inline; color: var(--color)">0$</div>
+                <div style="display: inline; color: var(--color)">${{ stats.money }}</div>
             </div>
             <nuxt-link :to="'/pay/' + $route.params.id" class="promote-link">Promote</nuxt-link>
         </div>
@@ -45,6 +45,7 @@ export default Vue.extend({
                             localization
                             date
                         }
+                        money
                     }
                 }
             `
