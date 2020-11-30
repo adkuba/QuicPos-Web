@@ -61,9 +61,23 @@ export default Vue.extend({
     },
 
     methods: {
+        addDays(date: Date, days: number) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        },
         parseViews(views: Array<any>){
+            
+            views = views.sort(function(a, b){
+                var date1 = a['date'].substring(0, 10) as string
+                var date2 = b['date'].substring(0, 10) as string
+                return new Date(date1).getTime() - new Date(date2).getTime()
+            })
             var labels: Array<string> = []
             var data: Array<number> = []
+            var labelsFinal: Array<string> = []
+            var dataFinal: Array<number> = []
+            
             views.forEach(view => {
                 var date = view['date'].substring(0, 10)
                 var index = labels.indexOf(date)
@@ -76,14 +90,36 @@ export default Vue.extend({
                     data[index] += 1
                 }
             });
+
+            for (var i = 0; i < labels.length-1; i++){
+                var date1 = new Date(labels[i])
+                var date2 = new Date(labels[i+1])
+
+                //add first
+                labelsFinal.push(labels[i])
+                dataFinal.push(data[i])
+
+                //add missing days
+                var diff = Math.abs(date1.getTime() - date2.getTime())
+                var diffDays = Math.ceil(diff / (1000 * 3600 * 24))
+                for(var j = 0; j < diffDays-1; j++){
+                    var day = this.addDays(date1, j+1)
+                    labelsFinal.push(day.getFullYear() + "-" + (day.getMonth()+1) + "-" + day.getDate())
+                    dataFinal.push(0)
+                }
+            }
+            //add final
+            labelsFinal.push(labels[labels.length-1])
+            dataFinal.push(data[data.length-1])
+
             var chartdata = {
-                labels: labels,
+                labels: labelsFinal,
                 datasets: [
                     {
                         backgroundColor: "transparent",
                         borderColor: "rgba(1, 116, 188, 0.8)",
                         pointBackgroundColor: "rgba(1, 116, 188, 1)",
-                        data: data,
+                        data: dataFinal,
                         label: "views"
                     }
                 ]
@@ -145,6 +181,7 @@ export default Vue.extend({
     width: 40%
     transform: translateX(-50%)
     box-sizing: border-box
+    padding-bottom: 200px
     &.md
         width: 70%
         top: 150px

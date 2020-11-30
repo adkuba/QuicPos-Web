@@ -135,6 +135,7 @@ export default Vue.extend({
 	padding: 0px 25px
 	width: 30%
 	box-sizing: border-box
+	padding-bottom: 200px
 	&.md
 		width: 80%
 		max-width: 500px

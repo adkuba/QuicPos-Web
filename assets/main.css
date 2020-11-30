@@ -1,9 +1,11 @@
 :root {
     --color: #000000;
     --bg: #ffffff;
+    --bglight: #f9f9f9;
   }
   
 .dark-mode {
 --color: #ffffff;
 --bg: #000000;
+--bglight: #161616;
 }

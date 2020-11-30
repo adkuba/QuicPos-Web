@@ -51,18 +51,16 @@ export default Vue.extend({
             var elements = this.stripe.elements()
             var style = {
             base: {
-                color: "#32325d",
+                color: getComputedStyle(document.documentElement).getPropertyValue('--color'),
                 fontFamily: 'Arial, sans-serif',
                 fontSmoothing: "antialiased",
                 fontSize: "16px",
-                "::placeholder": {
-                color: "#32325d"
-                }
+                iconColor: getComputedStyle(document.documentElement).getPropertyValue('--color')
             },
             invalid: {
                 fontFamily: 'Arial, sans-serif',
-                color: "#fa755a",
-                iconColor: "#fa755a"
+                color: getComputedStyle(document.documentElement).getPropertyValue('--color'),
+                iconColor: getComputedStyle(document.documentElement).getPropertyValue('--color')
             }
             }
             this.card = elements.create("card", { style: style })
@@ -242,7 +240,7 @@ export default Vue.extend({
 
 .dolar
     font-size: 19px
-    color: #B8B8B8
+    color: gray
     transform: translateX(+17px) translateY(+8px)
     position: absolute
 
@@ -255,13 +253,11 @@ export default Vue.extend({
 
 .amount
     padding-left: 45px
+    color: var(--color)
     margin-bottom: 0
-    color: #32325d
     border: 1px solid rgba(50, 50, 93, 0.1)
     border-bottom: 0
     border-radius: 4px 4px 0 0 
-    &::placeholder
-        color: #32325d
 
 form
     width: 100%
@@ -278,7 +274,7 @@ input
   height: 44px
   font-size: 16px
   width: 100%
-  background: white
+  background: var(--bglight)
   box-sizing: border-box
 
 .result-message 
@@ -306,7 +302,7 @@ input
   border: 1px solid rgba(50, 50, 93, 0.1)
   height: 44px
   width: 100%
-  background: white
+  background: var(--bglight)
   box-sizing: border-box
 
 #payment-request-button 
@@ -435,6 +431,7 @@ button:disabled
     top: 220px
     left: 50%
     transform: translateX(-50%)
+    padding-bottom: 200px
     &.md
         width: 60%
         top: 180px
