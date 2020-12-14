@@ -10,7 +10,7 @@
             They can be viewed and shared. Users builds their feed by interacing with posts.
             Disturbing content will be blocked by our team.
         </div>
-        <img class="image" :class="$mq" src="../assets/dark/content_based.png"/>
+        <img class="image" :class="$mq" src="/dark/content_based.png"/>
         
         <div class="feature-title">Data privacy</div>
         <div class="feature-text">
@@ -18,7 +18,7 @@
             You can choose special private mode where absolutely no data is collected.
             Uninstalling the app leads to the complete data erase.
         </div>
-        <img class="image" :class="$mq" src="../assets/dark/data_privacy.png"/>
+        <img class="image" :class="$mq" src="/dark/data_privacy.png"/>
 
         <div class="feature-title">Recommendation system</div>
         <div class="feature-text">
@@ -26,7 +26,7 @@
             The more you use the app the better your homepage posts will be.
             Simple as that. We also use AI to detect spam and all inappropriate content.
         </div>
-        <img class="image" :class="$mq" src="../assets/dark/recommender.png"/>
+        <img class="image" :class="$mq" src="/dark/recommender.png"/>
 
         <div class="feature-title">Promote posts</div>
         <div class="feature-text">
@@ -34,7 +34,7 @@
             Our recommender system chooses the best user for your content.
             All based on content with maximum privacy.
         </div>
-        <img class="image" :class="$mq" src="../assets/dark/promote_posts.png"/>
+        <img class="image" :class="$mq" src="/dark/promote_posts.png"/>
     </div>
   </div>
 </template>
