@@ -5,15 +5,8 @@ instance_class: F1
 handlers:
     # Serve all static files with urls ending with a file extension
   - url: /(.*\..+)$ 
-    static_files: dist/\1
-    upload: dist/(.*\..+)$
-    secure: always
-
-
-    # catch all handler to index.html
-  - url: /.*
-    static_files: dist/200.html
-    upload: dist/200.html
+    static_files: \1
+    upload: (.*\..+)$
     secure: always
 
 
