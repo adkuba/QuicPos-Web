@@ -2,10 +2,12 @@
     --color: #000000;
     --bg: #ffffff;
     --bglight: #f9f9f9;
+    --invert: invert(0%);
   }
   
 .dark-mode {
 --color: #ffffff;
 --bg: #000000;
 --bglight: #161616;
+--invert: invert(100%);
 }
