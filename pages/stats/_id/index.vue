@@ -25,15 +25,6 @@ import { GraphQLClient, gql } from 'graphql-request'
 import LineChart from '~/components/LineChart.vue'
 
 export default Vue.extend({
-  components: { LineChart },
-
-    data() {
-        return {
-            stats: null as any,
-            chartData: null as any
-        }
-    },
-
     head() {
         return {
             title: "QuicPos - Stats",
@@ -49,6 +40,13 @@ export default Vue.extend({
                 { hid: 'twitter:description', property: 'twitter:description', content: "Check stats for post: " + this.$route.params.id },
                 { hid: 'twitter:image', property: 'twitter:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" }
             ]
+        }
+    },
+
+    data() {
+        return {
+            stats: null as any,
+            chartData: null as any
         }
     },
 
