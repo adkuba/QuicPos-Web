@@ -122,6 +122,7 @@ export default Vue.extend({
 	object-fit: cover
 	border-radius: 5px
 	width: 100%
+	margin: 0
 	&.lg
 		height: 270px
 

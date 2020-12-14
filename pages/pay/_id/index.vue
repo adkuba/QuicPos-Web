@@ -45,6 +45,24 @@ export default Vue.extend({
         }
     },
 
+    head() {
+        return {
+            title: "QuicPos - Pay",
+            meta: [
+                { hid: 'description', name: 'description', content: "Promote post: " + this.$route.params.id },
+                { hid: 'og:url', property: 'og:url', content: "https://quicpos.com/pay/" + this.$route.params.id },
+                { hid: 'og:title', property: 'og:title', content: "QuicPos - Pay" },
+                { hid: 'og:description', property: 'og:description', content: "Promote post: " + this.$route.params.id },
+                { hid: 'og:image', property: 'og:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" },
+                { hid: 'twitter:card', property: 'twitter:card', content: "summary_large_image" },
+                { hid: 'twitter:url', property: 'twitter:url', content: "https://quicpos.com/pay/" + this.$route.params.id },
+                { hid: 'twitter:title', property: 'twitter:title', content: "QuicPos - Pay" },
+                { hid: 'twitter:description', property: 'twitter:description', content: "Promote post: " + this.$route.params.id },
+                { hid: 'twitter:image', property: 'twitter:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" }
+            ]
+        }
+    },
+
     updated() {
         if (this.stripe == null){
             this.stripe = Stripe('pk_test_51Hq3HhGxanHGMmbq1KrJQHmRTRusDEcL5ljOCTcMJUMIkB5IbpDEYs4Yq2G4FgIxkYpCjnQC0hmh7i9XJfix2Bx2007eVOvHwr')

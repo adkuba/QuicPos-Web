@@ -6,7 +6,7 @@
             <div class="info">User @{{stats.userid}}</div>
             <div>{{stats.text.substring(0, 100)}}...</div>
             <div class="chart-wrapper">
-                <line-chart :chartdata="chartData" :style="{'width': chartData['datasets'][0]['data'].length * 80} + 'px'" class="chart"/>
+                <line-chart :chartdata="chartData" :style="'width:' + chartData.labels.length * 50 + 'px'" class="chart"/>
             </div>
             <div class="info">
                 Budget:
@@ -31,6 +31,24 @@ export default Vue.extend({
         return {
             stats: null as any,
             chartData: null as any
+        }
+    },
+
+    head() {
+        return {
+            title: "QuicPos - Stats",
+            meta: [
+                { hid: 'description', name: 'description', content: "Check stats for post: " + this.$route.params.id },
+                { hid: 'og:url', property: 'og:url', content: "https://quicpos.com/stats/" + this.$route.params.id },
+                { hid: 'og:title', property: 'og:title', content: "QuicPos - Stats" },
+                { hid: 'og:description', property: 'og:description', content: "Check stats for post: " + this.$route.params.id },
+                { hid: 'og:image', property: 'og:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" },
+                { hid: 'twitter:card', property: 'twitter:card', content: "summary_large_image" },
+                { hid: 'twitter:url', property: 'twitter:url', content: "https://quicpos.com/stats/" + this.$route.params.id },
+                { hid: 'twitter:title', property: 'twitter:title', content: "QuicPos - Stats" },
+                { hid: 'twitter:description', property: 'twitter:description', content: "Check stats for post: " + this.$route.params.id },
+                { hid: 'twitter:image', property: 'twitter:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" }
+            ]
         }
     },
 
@@ -96,7 +114,7 @@ export default Vue.extend({
                 var date2 = new Date(labels[i+1])
 
                 //add first
-                labelsFinal.push(labels[i])
+                labelsFinal.push(labels[i].slice(5, 10))
                 dataFinal.push(data[i])
 
                 //add missing days
@@ -104,12 +122,12 @@ export default Vue.extend({
                 var diffDays = Math.ceil(diff / (1000 * 3600 * 24))
                 for(var j = 0; j < diffDays-1; j++){
                     var day = this.addDays(date1, j+1)
-                    labelsFinal.push(day.getFullYear() + "-" + (day.getMonth()+1) + "-" + day.getDate())
+                    labelsFinal.push((day.getMonth()+1) + "-" + day.getDate())
                     dataFinal.push(0)
                 }
             }
             //add final
-            labelsFinal.push(labels[labels.length-1])
+            labelsFinal.push(labels[labels.length-1].slice(5, 10))
             dataFinal.push(data[data.length-1])
 
             var chartdata = {
@@ -133,6 +151,20 @@ export default Vue.extend({
 
 
 <style lang="sass" scoped>
+
+.chart-wrapper
+    width: 100% 
+    overflow-x: auto
+.chart-wrapper::-webkit-scrollbar
+    height: 7px
+.chart-wrapper::-webkit-scrollbar-track
+    background: #e7e7e7
+    border-radius: 5px
+.chart-wrapper::-webkit-scrollbar-thumb
+    background: #c0c0c0
+    border-radius: 5px
+.chart-wrapper::-webkit-scrollbar-thumb:hover
+    background: #a3a3a3
 
 .info
     color: gray

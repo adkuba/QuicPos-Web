@@ -20,6 +20,24 @@ export default Vue.extend({
             return this.$store.state.post
         }
     },
+
+    head() {
+        return {
+            title: "QuicPos - Post",
+            meta: [
+                { hid: 'description', name: 'description', content: !this.$store.state.post.blocked && this.$store.state.post.ID.slice(10, -2) != '000000000000000000000000' ? this.$store.state.post.text : "This post doesn't exists" },
+                { hid: 'og:url', property: 'og:url', content: "https://quicpos.com/post/" + this.$route.params.id },
+                { hid: 'og:title', property: 'og:title', content: "QuicPos - Post" },
+                { hid: 'og:description', property: 'og:description', content: !this.$store.state.post.blocked && this.$store.state.post.ID.slice(10, -2) != '000000000000000000000000' ? this.$store.state.post.text : "This post doesn't exists" },
+                { hid: 'og:image', property: 'og:image', content: !this.$store.state.post.blocked && this.$store.state.post.image != "" ? "https://storage.googleapis.com/quicpos-images/" + this.$store.state.post.image : "https://storage.googleapis.com/quicpos-images/index_meta.png" },
+                { hid: 'twitter:card', property: 'twitter:card', content: "summary_large_image" },
+                { hid: 'twitter:url', property: 'twitter:url', content: "https://quicpos.com/post/" + this.$route.params.id },
+                { hid: 'twitter:title', property: 'twitter:title', content: "QuicPos - Post" },
+                { hid: 'twitter:description', property: 'twitter:description', content: !this.$store.state.post.blocked && this.$store.state.post.ID.slice(10, -2) != '000000000000000000000000' ? this.$store.state.post.text : "This post doesn't exists" },
+                { hid: 'twitter:image', property: 'twitter:image', content: !this.$store.state.post.blocked && this.$store.state.post.image != "" ? "https://storage.googleapis.com/quicpos-images/" + this.$store.state.post.image : "https://storage.googleapis.com/quicpos-images/index_meta.png" }
+            ]
+        }
+    },
     
     async asyncData({ params, store }){
         if (store.state.post.ID.slice(10, -2) != params.id){

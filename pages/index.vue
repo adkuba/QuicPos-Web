@@ -1,7 +1,7 @@
 <template>
   <div class="container" :class="$mq">
     <h1 class="title" :class="$mq">QuicPos</h1>
-    <div class="subtitle">New way for social media</div>
+    <div class="subtitle">Simpler social media</div>
     <div id="features" :class="$mq">
         
         <div class="feature-title">Content based</div>
@@ -10,6 +10,8 @@
             They can be viewed and shared. Users builds their feed by interacing with posts.
             Disturbing content will be blocked by our team.
         </div>
+        <img class="image" v-if="$colorMode.preference == 'light'" :class="$mq" src="../assets/light/content_based.png"/>
+        <img class="image" v-else :class="$mq" src="../assets/dark/content_based.png"/>
         
         <div class="feature-title">Data privacy</div>
         <div class="feature-text">
@@ -17,6 +19,8 @@
             You can choose special private mode where absolutely no data is collected.
             Uninstalling the app leads to the complete data erase.
         </div>
+        <img class="image" v-if="$colorMode.preference == 'light'" :class="$mq" src="../assets/light/data_privacy.png"/>
+        <img class="image" v-else :class="$mq" src="../assets/dark/data_privacy.png"/>
 
         <div class="feature-title">Recommendation system</div>
         <div class="feature-text">
@@ -24,6 +28,8 @@
             The more you use the app the better your homepage posts will be.
             Simple as that. We also use AI to detect spam and all inappropriate content.
         </div>
+        <img class="image" v-if="$colorMode.preference == 'light'" :class="$mq" src="../assets/light/recommender.png"/>
+        <img class="image" v-else :class="$mq" src="../assets/dark/recommender.png"/>
 
         <div class="feature-title">Promote posts</div>
         <div class="feature-text">
@@ -31,6 +37,8 @@
             Our recommender system chooses the best user for your content.
             All based on content with maximum privacy.
         </div>
+        <img class="image" v-if="$colorMode.preference == 'light'" :class="$mq" src="../assets/light/promote_posts.png"/>
+        <img class="image" v-else :class="$mq" src="../assets/dark/promote_posts.png"/>
     </div>
   </div>
 </template>
@@ -38,18 +46,51 @@
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+    head() {
+        return {
+            title: "QuicPos",
+            meta: [
+                { hid: 'description', name: 'description', content: "QuicPos is content based, no accounts, only posts. Data privacy is the most important thing. Discover our system with mobile applications. Advanced recommender system smooths your experience. Users can also promote their posts." },
+                { hid: 'og:url', property: 'og:url', content: "https://quicpos.com" },
+                { hid: 'og:title', property: 'og:title', content: "QuicPos" },
+                { hid: 'og:description', property: 'og:description', content: "QuicPos is content based, no accounts, only posts. Data privacy is the most important thing. Discover our system with mobile applications. Advanced recommender system smooths your experience. Users can also promote their posts." },
+                { hid: 'og:image', property: 'og:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" },
+                { hid: 'twitter:card', property: 'twitter:card', content: "summary_large_image" },
+                { hid: 'twitter:url', property: 'twitter:url', content: "https://quicpos.com" },
+                { hid: 'twitter:title', property: 'twitter:title', content: "QuicPos" },
+                { hid: 'twitter:description', property: 'twitter:description', content: "QuicPos is content based, no accounts, only posts. Data privacy is the most important thing. Discover our system with mobile applications. Advanced recommender system smooths your experience. Users can also promote their posts." },
+                { hid: 'twitter:image', property: 'twitter:image', content: "https://storage.googleapis.com/quicpos-images/index_meta.png" }
+            ]
+        }
+    },
+})
 </script>
 
 <style lang="sass">
 
+.image
+    width: 50%
+    margin-right: 50%
+    margin-bottom: 200px
+    object-fit: contain
+    &.sm
+        width: 95%
+        margin-right: 0
+        margin-bottom: 100px
+    &.md
+        width: 60%
+        margin-right: 40%
+        margin-bottom: 150px
+
 .feature-text
-    margin-bottom: 80px
+    margin-bottom: 50px
     text-align: left
 
 .feature-title
+    text-align: left
     font-size: 19px
-    margin-bottom: 4px
+    margin-bottom: 20px
     font-weight: bold
 
 #features
