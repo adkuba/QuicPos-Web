@@ -35,6 +35,19 @@
             All based on content with maximum privacy.
         </div>
         <img class="image" :class="$mq" src="/dark/promote_posts.png"/>
+        <div id="regulations" class="feature-title">Regulations</div>
+        <div class="regulation" :class="$mq">
+            We do not take any responsibility for the content sent by users. 
+            Our team works hard to review every post. If you will see any inappropriate content please report it. 
+            After the review we can block your post.
+        </div>
+        <div class="regulation" :class="$mq">
+            We do not collect any personal data. In the normal browsing mode, QuicPos measures the time spent on a current post and your IP address. 
+            We can’t link these data with you as it is anonymous. In private mode QuicPos doesn’t collect any data.
+        </div>
+        <div class="regulation" :class="$mq">
+            You must be at least 13 years old to use QuicPos.
+        </div>
     </div>
   </div>
 </template>
@@ -63,7 +76,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 .image
     filter: var(--invert)
@@ -83,6 +96,12 @@ export default Vue.extend({
 .feature-text
     margin-bottom: 50px
     text-align: left
+
+.regulation
+    text-align: left
+    margin-bottom: 25px
+    &.sm
+        margin-bottom: 40px
 
 .feature-title
     text-align: left

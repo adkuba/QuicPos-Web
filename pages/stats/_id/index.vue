@@ -165,6 +165,7 @@ export default Vue.extend({
     background: #a3a3a3
 
 .info
+    margin-top: 10px
     color: gray
     font-size: 15px
     margin-bottom: 10px
@@ -179,11 +180,13 @@ export default Vue.extend({
     margin-top: 50px
     height: 200px
     margin-bottom: 30px
+    min-width: 100%
 
 .subtitle
-    font-size: 20px
-    color: var(--color)
-    letter-spacing: 2px
+    font-size: 25px
+    letter-spacing: 1px
+    font-weight: bold
+    margin-bottom: 20px
 
 .error
     position: absolute

@@ -5,6 +5,7 @@
             <div class="main-title">PAY</div>
             <div>User @{{stats.userid}}</div>
             <div>{{stats.text.substring(0, 100)}}...</div>
+            <div class="money-info">1$ equals to 100 views</div>
             <!-- Display a payment form -->
             <form id="payment-form" :class="$mq" action="javascript:void(0);">
                 <div class="dolar">$</div>
@@ -256,6 +257,11 @@ export default Vue.extend({
     display: inline-block
     margin-left: 20px
 
+.money-info
+    margin-top: 30px
+    font-size: 15px
+    color: gray
+
 .dolar
     font-size: 19px
     color: gray
@@ -281,7 +287,7 @@ form
     width: 100%
     align-self: center
     border-radius: 7px
-    padding: 30px 0
+    padding: 10px 0 30px 0
     box-sizing: border-box
 
 input 

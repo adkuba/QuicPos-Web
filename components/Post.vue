@@ -117,14 +117,9 @@ export default Vue.extend({
 
 
 .image
-	height: 200px
-	max-height: 80vh
-	object-fit: cover
 	border-radius: 5px
 	width: 100%
 	margin: 0
-	&.lg
-		height: 270px
 
 
 #post
