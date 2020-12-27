@@ -91,6 +91,8 @@ export default Vue.extend({
             const variables = { id: this.$route.params.id }
             const resp = await client.request(query, variables).catch(error => {})
             if (resp){
+                var parsedText = sanitizeHtml(resp.viewerPost['text'])
+                resp.viewerPost['text'] = linkifyHtml(parsedText)
                 this.$store.commit('changePost', resp.viewerPost)
             }
         }
