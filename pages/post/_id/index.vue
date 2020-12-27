@@ -12,6 +12,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { GraphQLClient, gql } from 'graphql-request'
+import * as linkify from 'linkifyjs'
+import linkifyHtml from 'linkifyjs/html'
 
 export default Vue.extend({
 
@@ -60,6 +62,7 @@ export default Vue.extend({
             const variables = { id: params.id }
             const post = await client.request(query, variables).catch(error => {})
             if (post) {
+                post.viewerPost['text'] = linkifyHtml(post.viewerPost['text'])
                 store.commit('changePost', post.viewerPost)
             }
         }

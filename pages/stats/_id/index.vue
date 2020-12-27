@@ -221,6 +221,7 @@ export default Vue.extend({
     &.sm
         width: 100%
         padding: 0px 24px
+        padding-bottom: 200px
         top: 110px
 
     

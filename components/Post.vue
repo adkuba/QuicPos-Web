@@ -2,7 +2,9 @@
 	<div id="post" :class="$mq">
 		<div v-if="!post.initialReview" class="verification">Post still unverified!</div>
 		<div class="userid">User @{{ post.userId }}</div>
-		<div class="text">{{ post.text }}</div>
+		<div class="text">
+			<td v-html="post.text"></td>
+		</div>
 		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" :class="$mq" v-if="post.image">
 		<div class="date">
 			{{ post.creationTime.split(' ')[0] }} &bull; {{ post.creationTime.split(' ')[1].slice(0, -6) }}
