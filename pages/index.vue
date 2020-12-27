@@ -4,6 +4,10 @@
     <div class="subtitle">Simpler social media</div>
     <div id="features" :class="$mq">
         
+        <div class="feature-title">Open tests</div>
+        <a href="https://www.google.com" class="link" target="_blank">Android</a>
+        <a href="https://www.google.com" class="link" target="_blank">iOS</a>
+
         <div class="feature-title">Content based</div>
         <div class="feature-text">
             No profiles, likes or comments. Everything revolve around posts.
@@ -77,6 +81,16 @@ export default Vue.extend({
 </script>
 
 <style lang="sass" scoped>
+
+.link
+    width: 48%
+    text-align: center
+    display: inline-block
+    margin-bottom: 120px
+    margin-top: 40px
+    text-decoration: none
+    color: #5CB3FF
+    font-weight: bold
 
 .image
     filter: var(--invert)
