@@ -66,7 +66,7 @@ export default Vue.extend({
 
     updated() {
         if (this.stripe == null){
-            this.stripe = Stripe('pk_test_51Hq3HhGxanHGMmbq1KrJQHmRTRusDEcL5ljOCTcMJUMIkB5IbpDEYs4Yq2G4FgIxkYpCjnQC0hmh7i9XJfix2Bx2007eVOvHwr')
+            this.stripe = Stripe('pk_live_51Hq3HhGxanHGMmbqgEbQaZTPwbh0WNWks3XsdARwxv3bhCuMvm7XGGkREwxyOkflJtT3gZD0TgxEwIZ1d0DyeyBE00vBKQDspm')
             var elements = this.stripe.elements()
             var style = {
             base: {
