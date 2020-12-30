@@ -5,8 +5,13 @@
     <div id="features" :class="$mq">
         
         <div class="feature-title">Open tests</div>
-        <a href="https://www.google.com" class="link" target="_blank">Android</a>
-        <a href="https://www.google.com" class="link" target="_blank">iOS</a>
+        <div class="feature-text">
+            Kliknij odpowiedni link poniżej. Zostaniesz zapisany do otwartego testu QuicPos.
+            Na iOS wymagane będzie pobranie dodatkowej aplikacji TestFlight.
+            Każda opinia i znaleziony błąd jest bardzo ważny!
+        </div>
+        <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" target="_blank">Android</a>
+        <a href="https://testflight.apple.com/join/FXXagROz" class="link" target="_blank">iOS</a>
 
         <div class="feature-title">Content based</div>
         <div class="feature-text">
@@ -86,8 +91,7 @@ export default Vue.extend({
     width: 48%
     text-align: center
     display: inline-block
-    margin-bottom: 120px
-    margin-top: 40px
+    margin-bottom: 200px
     text-decoration: none
     color: #5CB3FF
     font-weight: bold
