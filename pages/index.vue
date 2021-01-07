@@ -4,14 +4,16 @@
     <div class="subtitle">Simpler social media</div>
     <div id="features" :class="$mq">
         
-        <div class="feature-title">Open tests</div>
+        <div class="feature-title">Mobile applications</div>
         <div class="feature-text">
-            Kliknij odpowiedni link poniżej. Zostaniesz zapisany do otwartego testu QuicPos.
-            Na iOS wymagane będzie pobranie dodatkowej aplikacji TestFlight.
-            Każda opinia i znaleziony błąd jest bardzo ważny!
+            Download our special application to use QuicPos.
+            You will be able to discover content, create and share posts.
+            Save your user ID (info icon in app) to have complete control over your content.
+            Our mobile applications are secure and private.
+            Please report to us any bugs or errors.
         </div>
         <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" :class="$mq" target="_blank">Android</a>
-        <a href="https://testflight.apple.com/join/FXXagROz" class="link" :class="$mq" target="_blank">iOS</a>
+        <a href="https://apps.apple.com/us/app/quicpos/id1546713395" class="link" :class="$mq" target="_blank">iOS</a>
 
         <div class="feature-title">Content based</div>
         <div class="feature-text">
@@ -48,7 +50,7 @@
         <div class="regulation" :class="$mq">
             We do not take any responsibility for the content sent by users. 
             Our team works hard to review every post. If you will see any inappropriate content please report it. 
-            After the review we can block your post.
+            After the review we can block your post. We do not tolerate objectionable content or abusive users.
         </div>
         <div class="regulation" :class="$mq">
             We do not collect any personal data. In the normal browsing mode, QuicPos measures the time spent on a current post and your IP address. 
