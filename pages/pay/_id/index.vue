@@ -3,7 +3,7 @@
         <nuxt-link to="/" id="title">QuicPos</nuxt-link>
         <div id="pay" :class="$mq" v-if="stats">
             <div class="main-title">PAY</div>
-            <div>User @{{stats.userid}}</div>
+            <div class="user">User @{{ stats.userid.substring(0, 4) }}</div>
             <div>{{stats.text.substring(0, 100)}}...</div>
             <div class="money-info">1$ equals to 100 views</div>
             <!-- Display a payment form -->
@@ -250,6 +250,11 @@ export default Vue.extend({
 
 <style lang="sass" scoped>
 
+.user 
+    color: gray
+    font-size: 15px
+    margin-bottom: 10px
+
 .info
     color: gray
     font-size: 15px
@@ -273,7 +278,7 @@ export default Vue.extend({
     text-decoration: none
     color: var(--color)
     font-weight: bold
-    font-size: 20px
+    font-size: 19px
 
 .amount
     padding-left: 45px

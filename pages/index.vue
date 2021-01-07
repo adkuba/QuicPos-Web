@@ -10,8 +10,8 @@
             Na iOS wymagane będzie pobranie dodatkowej aplikacji TestFlight.
             Każda opinia i znaleziony błąd jest bardzo ważny!
         </div>
-        <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" target="_blank">Android</a>
-        <a href="https://testflight.apple.com/join/FXXagROz" class="link" target="_blank">iOS</a>
+        <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" :class="$mq" target="_blank">Android</a>
+        <a href="https://testflight.apple.com/join/FXXagROz" class="link" :class="$mq" target="_blank">iOS</a>
 
         <div class="feature-title">Content based</div>
         <div class="feature-text">
@@ -90,18 +90,23 @@ export default Vue.extend({
 .link
     width: 48%
     text-align: center
+    font-size: 20px
     display: inline-block
     margin-bottom: 200px
     text-decoration: none
     color: #5CB3FF
     font-weight: bold
+    &.md
+        margin-bottom: 170px
+    &.sm
+        margin-bottom: 130px
 
 .image
     filter: var(--invert)
     width: 50%
-    margin-right: 50%
     margin-bottom: 200px
     object-fit: contain
+    text-align: center
     &.sm
         width: 95%
         margin-right: 0

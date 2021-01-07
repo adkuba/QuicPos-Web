@@ -3,7 +3,7 @@
         <nuxt-link to="/" id="title">QuicPos</nuxt-link>
         <div id="stat" v-if="stats" :class="$mq">
             <div class="subtitle">Stats</div>
-            <div class="info">User @{{stats.userid}}</div>
+            <div class="info">User @{{ stats.userid.substring(0, 4) }}</div>
             <div>{{stats.text.substring(0, 100)}}...</div>
             <div class="chart-wrapper">
                 <line-chart :chartdata="chartData" :style="'width:' + chartData.labels.length * 50 + 'px'" class="chart"/>
@@ -12,6 +12,7 @@
                 Budget:
                 <div style="display: inline; color: var(--color)">${{ stats.money }}</div>
             </div>
+            <nuxt-link :to="'/post/' + $route.params.id" class="promote-link">Post</nuxt-link>
             <nuxt-link :to="'/pay/' + $route.params.id" class="promote-link">Promote</nuxt-link>
         </div>
         <div v-else class="error">This post doesn't exists</div>
@@ -174,7 +175,8 @@ export default Vue.extend({
     text-decoration: none
     color: var(--color)
     font-weight: bold
-    font-size: 20px
+    font-size: 19px
+    margin-right: 30px
 
 .chart
     margin-top: 50px

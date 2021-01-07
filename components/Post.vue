@@ -1,7 +1,7 @@
 <template>
 	<div id="post" :class="$mq">
 		<div v-if="!post.initialReview" class="verification">Post still unverified!</div>
-		<div class="userid">User @{{ post.userId }}</div>
+		<div class="userid">User @{{ post.userId.substring(0, 4) }}</div>
 		<div class="text" v-html="post.text"></div>
 		<img :src="'https://storage.googleapis.com/quicpos-images/' + post.image " class="image" :class="$mq" v-if="post.image">
 		<div class="date">
