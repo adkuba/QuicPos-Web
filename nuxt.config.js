@@ -10,6 +10,12 @@ export default {
     script: [
       {
         src: "https://js.stripe.com/v3/",
+      },
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=AW-649568508",
+      },
+      {
+        src: "/js/google.js",
       }
     ],
     link: [

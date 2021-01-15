@@ -12,8 +12,8 @@
             Our mobile applications are secure and private.
             Please report to us any bugs or errors.
         </div>
-        <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" :class="$mq" target="_blank">Android</a>
-        <a href="https://apps.apple.com/us/app/quicpos/id1546713395" class="link" :class="$mq" target="_blank">iOS</a>
+        <a href="https://play.google.com/store/apps/details?id=com.quicpos.quicpos" class="link" :class="$mq" target="_blank" v-on:click="gtag_report_conversion()">Android</a>
+        <a href="https://apps.apple.com/us/app/quicpos/id1546713395" class="link" :class="$mq" target="_blank" v-on:click="gtag_report_conversion()">iOS</a>
 
         <div class="feature-title">Content based</div>
         <div class="feature-text">
@@ -84,6 +84,21 @@ export default Vue.extend({
             ]
         }
     },
+    methods: {
+        gtag_report_conversion(url: any) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-649568508/iEB3CIPEjfEBEPzB3rUC',
+                'event_callback': callback
+            });
+            console.log("Konwersja")
+            return false;
+        }
+    }
 })
 </script>
 
