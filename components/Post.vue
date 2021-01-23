@@ -33,7 +33,7 @@ export default Vue.extend({
 		async reportPost(){
 			if (confirm("Do you really want to report this post?")){
 				const query = gql`
-					mutation review($userID: Int!, $postID: String!) {
+					mutation review($userID: String!, $postID: String!) {
 						report(
 							input: { 
 								userID: $userID, 
@@ -43,7 +43,11 @@ export default Vue.extend({
 				`
 				const client = new GraphQLClient("https://api.quicpos.com/query")
 
-				const variables = { userID: -3, postID: this.post.ID.slice(10, -2) }
+				var today = new Date()
+				var dd = String(today.getDate()).padStart(2, '0')
+				var mm = String(today.getMonth() + 1).padStart(2, '0')
+				var yyyy = today.getFullYear()
+				const variables = { userID: "webpage_" + dd + mm + yyyy, postID: this.post.ID.slice(10, -2) }
 				const resp = await client.request(query, variables).catch(error => {})
 				if (!resp){
 					alert("Can't report post, contact with us.")
