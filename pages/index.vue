@@ -2,8 +2,7 @@
   <div class="container" :class="$mq">
     <h1 class="title" :class="$mq">QuicPos</h1>
     <div class="subtitle">Simpler social media</div>
-    <div id="features" :class="$mq">
-        
+    <div id="features" :class="$mq">   
         <div class="feature-title">Mobile applications</div>
         <div class="feature-text">
             Download our special application to use QuicPos.
@@ -60,6 +59,9 @@
             You must be at least 13 years old to use QuicPos.
         </div>
     </div>
+    <div id="end" :class="$mq">
+        admin@tline.site
+    </div>
   </div>
 </template>
 
@@ -95,7 +97,7 @@ export default Vue.extend({
                 'send_to': 'AW-649568508/iEB3CIPEjfEBEPzB3rUC',
                 'event_callback': callback
             });
-            console.log("Konwersja")
+            //console.log("Konwersja")
             return false;
         }
     }
@@ -103,6 +105,13 @@ export default Vue.extend({
 </script>
 
 <style lang="sass" scoped>
+
+#end
+    color: gray
+    font-size: 14px
+    position: absolute
+    right: 15px
+    transform: translateY(170px)
 
 .link
     width: 48%

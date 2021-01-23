@@ -1,8 +1,20 @@
-# QuicPos-Web
-QuicPos webpage in Nuxt.
+# Table of Contents
+- [What I've learned](#what-ive-learned)
+- [Important](#important)
+- [Nuxt](#nuxt)
 
-## Build Setup
 
+
+# What I've learned
+- How to create **SSR** webpage in **Nuxt**
+- How to automatically deploy to **Google Cloud**
+- Working with **Typescript** and **Chart.js**
+- Implementing payments with **Stripe**
+
+
+
+# Important
+To recreate project run:
 ```bash
 # install dependencies
 $ npm install
@@ -17,10 +29,13 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+See also <code>cloudbuild.yaml</code> and <code>app.yaml</code> - Google Cloud configuration files. Automatic Google Build webhook is set to this repository.
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## UWAGI
-Jak robilem w mounted to nie wykrywalo mi elementow po get by id dlatego że elemnt do którego chciałem się odnieść był w v-if!!!!  V-if nie wykonał się jeszcze i tego elementu nie bylo - dlatego nie moglem zainicjalizowac stripe<br>
-Dlatego przenioslem inicjalizacje stripe do updated ze sprawdzaniem!
-* zeby sie kompilator typescripta nie prul musialem zainstalowac typy stripe: <code>sudo npm install --save @types/stripe-v3</code> i dodac w tsconfig w types linijkę <code>@types/stripe-v3</code>
+
+# Nuxt
+[Nuxt](https://nuxtjs.org/) is like Vue but with already implemented SSR and many more features. Notes about the project:
+- I wanted to reference element in mounted hook but I couldn't reach it. Referenced id was in <code>v-if</code> and the conditional rendering was not done. I needed to move code from mounted to updated hook with duplication check to execute code only once.
+- Typescript compiler needs all used in code types to be installed. For example, to work with stripe execute: <code>sudo npm install --save @types/stripe-v3</code> and add in tsconfig: <code>@types/stripe-v3</code>
+- <code>main.css</code> contains CSS definition of dark and light mode.
+- See stats folder for Chart.js implementation.

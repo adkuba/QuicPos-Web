@@ -9,6 +9,11 @@ export default {
             default: null
         }
     },
+    computed: {
+        computedData: function() {
+            return this.chartdata
+        }
+    },
     data() {
         return {
             viewsOptions: {
@@ -34,7 +39,13 @@ export default {
         }
     },
     mounted() {
-        this.renderChart(this.chartdata, this.viewsOptions)
+        this.renderChart(this.computedData, this.viewsOptions)
+    },
+    watch: {
+        chartdata: function(){
+            //console.log("Zmiana")
+            this.renderChart(this.computedData, this.viewsOptions)
+        }
     }
 }
 </script>

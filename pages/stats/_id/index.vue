@@ -4,9 +4,12 @@
         <div id="stat" v-if="stats" :class="$mq">
             <div class="subtitle">Stats</div>
             <div class="info">User @{{ stats.userid.substring(0, 4) }}</div>
-            <div>{{stats.text.substring(0, 100)}}...</div>
+            <div class="text">{{stats.text.substring(0, 100)}}...</div>
+            <input type="text" class="input-date" :class="$mq" v-model="inputStart">
+            <input type="text" class="input-date" :class="$mq" v-model="inputEnd">
+            <div class="get-stats" :class="$mq" v-on:click="newChart">Get chart</div>
             <div class="chart-wrapper">
-                <line-chart :chartdata="chartData" :style="'width:' + chartData.labels.length * 50 + 'px'" class="chart"/>
+                <line-chart :chartdata="calculatedData" :style="'width:' + calculatedData.labels.length * 50 + 'px'" class="chart"/>
             </div>
             <div class="info">
                 Budget:
@@ -47,7 +50,12 @@ export default Vue.extend({
     data() {
         return {
             stats: null as any,
-            chartData: null as any
+            chartData: null as any,
+            calculatedData: null as any,
+            startElement: 0,
+            endElement: 0,
+            inputStart: "",
+            inputEnd: "",
         }
     },
 
@@ -73,11 +81,49 @@ export default Vue.extend({
             if (resp){
                 this.stats = resp.getStats
                 this.chartData = this.parseViews(this.stats['views'])
+                this.newChart()
+                var labels = this.chartData['labels'] as Array<string>
+                this.inputStart = labels[this.startElement]
+                this.inputEnd = labels[this.endElement-1]
             }
         }
     },
 
     methods: {
+        calculateIndex(){
+            var labels = this.chartData['labels'] as Array<string>
+            var detectedStart = labels.indexOf(this.inputStart)
+            if (detectedStart == -1){
+                this.inputStart = labels[this.startElement]
+                return
+            }
+            var detectedEnd = labels.indexOf(this.inputEnd)
+            if (detectedEnd == -1){
+                this.inputEnd = labels[this.endElement-1]
+                return
+            }
+            this.startElement = detectedStart
+            this.endElement = detectedEnd + 1
+        },
+        newChart(){
+            var labels = this.chartData['labels'] as Array<string>
+            var data = this.chartData['datasets'][0]['data'] as Array<number>
+            this.calculateIndex()
+
+            var calculatedData = {
+                labels: labels.slice(this.startElement, this.endElement),
+                datasets: [
+                    {
+                        backgroundColor: "transparent",
+                        borderColor: "rgba(1, 116, 188, 0.8)",
+                        pointBackgroundColor: "rgba(1, 116, 188, 1)",
+                        data: data.slice(this.startElement, this.endElement),
+                        label: "views"
+                    }
+                ]
+            }
+            this.calculatedData = calculatedData
+        },
         addDays(date: Date, days: number) {
             var result = new Date(date);
             result.setDate(result.getDate() + days);
@@ -121,13 +167,22 @@ export default Vue.extend({
                 var diffDays = Math.ceil(diff / (1000 * 3600 * 24))
                 for(var j = 0; j < diffDays-1; j++){
                     var day = this.addDays(date1, j+1)
-                    labelsFinal.push((day.getMonth()+1) + "-" + day.getDate())
+                    var month = (day.getMonth() + 1).toString()
+                    if (month.length == 1){
+                        month = "0" + month
+                    }
+                    labelsFinal.push(month + "-" + day.getDate())
                     dataFinal.push(0)
                 }
             }
             //add final
             labelsFinal.push(labels[labels.length-1].slice(5, 10))
             dataFinal.push(data[data.length-1])
+            this.endElement = labelsFinal.length
+            this.startElement = this.endElement - 10
+            if (this.startElement < 0){
+                this.startElement = 0
+            }
 
             var chartdata = {
                 labels: labelsFinal,
@@ -150,6 +205,31 @@ export default Vue.extend({
 
 
 <style lang="sass" scoped>
+
+.text
+    margin-bottom: 40px
+
+.input-date
+    border-radius: 6px
+    border: 1px solid rgba(50, 50, 93, 0.1)
+    font-size: 15px
+    padding: 5px
+    background: var(--bglight)
+    box-sizing: border-box
+    color: gray
+    width: 30%
+    &.sm
+        width: 60%
+        margin-bottom: 5px
+
+.get-stats
+    cursor: pointer
+    display: inline-block
+    width: 30%
+    transform: translateY(5px)
+    margin-left: 10px
+    &.sm
+        margin-left: 5%
 
 .chart-wrapper
     width: 100% 
@@ -179,7 +259,7 @@ export default Vue.extend({
     margin-right: 30px
 
 .chart
-    margin-top: 50px
+    margin-top: 20px
     height: 200px
     margin-bottom: 30px
     min-width: 100%
