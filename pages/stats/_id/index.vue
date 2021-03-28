@@ -74,7 +74,7 @@ export default Vue.extend({
                     }
                 }
             `
-            const client = new GraphQLClient("https://api.quicpos.com/query")
+            const client = new GraphQLClient("https://api.quicpos.com/quicpos/query")
 
             const variables = { id: this.$route.params.id }
             const resp = await client.request(query, variables).catch(error => {})
