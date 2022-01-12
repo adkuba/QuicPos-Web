@@ -1,22 +1,22 @@
-FROM node:lts-alpine
+FROM node:11.13.0-alpine
+RUN apk add g++ make python
 
-# install simple http server for serving static content
-RUN npm install -g http-server
+# create destination directory
+RUN mkdir -p /usr/src/nuxt-app
+WORKDIR /usr/src/nuxt-app
 
-# make the 'app' folder the current working directory
-WORKDIR /app
+# update and install dependency
+RUN apk update && apk upgrade
+RUN apk add git
 
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
-
-# install project dependencies
+# copy the app, note .dockerignore
+COPY . /usr/src/nuxt-app/
 RUN npm install
-
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
-
-# build app for production with minification
 RUN npm run build
 
-EXPOSE 9277
-CMD [ "http-server", "dist" ]
+EXPOSE 3000
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD [ "npm", "start" ]
