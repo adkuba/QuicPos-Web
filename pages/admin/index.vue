@@ -32,7 +32,7 @@ export default Vue.extend({
             mode: '',
             left: 0,
             spam: 0,
-            client: new GraphQLClient("https://api.quicpos.com/quicpos/query")
+            client: new GraphQLClient("http://akuba.pl/api/quicpos/query")
         }
     },
     methods: {

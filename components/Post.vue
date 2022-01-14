@@ -41,7 +41,7 @@ export default Vue.extend({
 							})
 					}
 				`
-				const client = new GraphQLClient("https://api.quicpos.com/quicpos/query")
+				const client = new GraphQLClient("http://akuba.pl/api/quicpos/query")
 
 				var today = new Date()
 				var dd = String(today.getDate()).padStart(2, '0')

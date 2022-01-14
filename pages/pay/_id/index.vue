@@ -42,7 +42,7 @@ export default Vue.extend({
             stats: null as any,
             stripe: null as any,
             card: null as any,
-            client: new GraphQLClient("https://api.quicpos.com/quicpos/query")
+            client: new GraphQLClient("http://akuba.pl/api/quicpos/query")
         }
     },
 
@@ -115,7 +115,7 @@ export default Vue.extend({
                     }
                 }
             `
-            const client = new GraphQLClient("https://api.quicpos.com/quicpos/query")
+            const client = new GraphQLClient("http://akuba.pl/api/quicpos/query")
 
             const variables = { id: this.$route.params.id }
             const resp = await client.request(query, variables).catch(error => {})
@@ -132,7 +132,7 @@ export default Vue.extend({
                     getStripeClient(amount: $amount)
                 }
             `
-            const client = new GraphQLClient("https://api.quicpos.com/quicpos/query")
+            const client = new GraphQLClient("http://akuba.pl/api/quicpos/query")
 
             var amountField = document.getElementById("amount-number") as HTMLInputElement
             if (amountField){
