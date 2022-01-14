@@ -42,6 +42,10 @@ export default {
     '@nuxtjs/color-mode'
   ],
 
+  router: {
+    base: '/quicpos/'
+  },
+
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
